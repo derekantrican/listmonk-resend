@@ -34,13 +34,6 @@ pub struct MessengerRequest {
     campaign: Campaign,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
-pub struct MessengerResponse {
-    status: String,
-    message: Option<String>,
-    data: Option<String>,
-}
-
 pub async fn messenger_handler(
     email_buffer: web::Data<Buffer>,
     config: web::Data<Configuration>,

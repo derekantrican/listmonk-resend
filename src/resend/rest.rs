@@ -143,6 +143,15 @@ async fn handle_bounce(
 ) -> Result<HttpResponse> {
     let data = &payload.data;
     let campaign_uuid = data.tag("campaign");
+    if let Some(bounce) = &data.bounce {
+        log::info!(
+            "Bounce of email {}: type={:?} sub_type={:?} message={:?}",
+            data.email_id,
+            bounce.bounce_type,
+            bounce.sub_type,
+            bounce.message
+        );
+    }
     let mut failed = false;
     for recipient in &data.to {
         let address = match EmailAddress::from_string(recipient) {
